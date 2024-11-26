@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+// Define the Iosevka font face
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+// Define other font faces for different weights
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-ExtraLight.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Heavy.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Iosevka";
+    src: url("../assets/fonts/Iosevka-Thin.woff") format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
+$base-font-family: "Iosevka" !default;
+$base-font-size: 16px !default;
+$base-font-weight: 400 !default;
+$small-font-size: $base-font-size * 0.875 !default;
+$base-line-height: 1.5 !default;
+
+$spacing-unit: 30px !default;
+
+$text-color: white !default;
+$background-color: black !default;
+$brand-color: red !default;
+
+$grey-color: blue !default;
+$grey-color-light: black !default;
+$grey-color-dark: white !default;
+
+$table-text-align: left !default;
+
+// Width of the content area
+$content-width: 800px !default;
+
+$on-palm: 600px !default;
+$on-laptop: 800px !default;
+
+// Use media queries like this:
+// @include media-query($on-palm) {
+//   .wrapper {
+//     padding-right: $spacing-unit / 2;
+//     padding-left: $spacing-unit / 2;
+//   }
+// }
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+@mixin relative-font-size($ratio) {
+    font-size: $base-font-size * $ratio;
+}
+
+// Import partials.
+@import "minima/base", "minima/layout", "minima/syntax-highlighting";
