@@ -11,13 +11,13 @@ where I'm pursuing a _`BSc Specialization in Computing Science`_.
 
 I'm enjoy all things code! From Infrastructure to DevOps to Software Development.
 
-Previously, I leveled up at **QBoost**, a Laboratory QMC company, as a Database Developer Intern. There, I got my hands dirty building their customizable platform that adapted to each client's unique needs.
+Previously, I worked at **QBoost**, a Laboratory QMC company, as a Database Developer Intern. There, I got my hands dirty building their customizable platform that adapted to each client's unique needs.
 
 > Ruby, HTML, CSS, JS, SQLite
 
-Currently, I'm bringing the heat at **ATCO Corp.** as a Co-Op student on the **Cloud Tools and Automation** team.
+Currently, I'm working at **ATCO Corp.** as a Co-op Student on the **Cloud Tools and Automation** team.
 
-> Ansible, Azure, ServiceNow, Dynatrace, Bash
+> Ansible, Azure, ServiceNow, Dynatrace
 
 I also really enjoy taking Systems-related courses like _Operating Systems_ and _Computer Networks_, and really interesting and rigorous topics such as _Compiler Design_
 
