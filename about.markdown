@@ -1,18 +1,31 @@
 ---
 layout: page
-title: About
+title: About Moi
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hey there!
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+My name's _`Manav`_. I'm a senior at the _`University of Alberta, Canada`_,
+where I'm pursuing a _`BSc Specialization in Computing Science`_.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I'm enjoy all things code! From Infrastructure to DevOps to Software Development.
 
+Previously, I leveled up at **QBoost**, a Laboratory QMC company, as a Database Developer Intern. There, I got my hands dirty building their customizable platform that adapted to each client's unique needs.
 
-[jekyll-organization]: https://github.com/jekyll
+> Ruby, HTML, CSS, JS, SQLite
+
+Currently, I'm bringing the heat at **ATCO Corp.** as a Co-Op student on the **Cloud Tools and Automation** team.
+
+> Ansible, Azure, ServiceNow, Dynatrace, Bash
+
+I also really enjoy taking Systems-related courses like _Operating Systems_ and _Computer Networks_, and really interesting and rigorous topics such as _Compiler Design_
+
+> C++, C, Python, LaTeX, ANTLR4
+
+As _VP Marketing_ for the _University of Alberta Investors Club_ `(UAIC)`, I help connect students interested in markets and investing. I manage our outreach, events and social media presence to grow the community of budding investors.
+
+I am a big fan of case competitions, hackathons, and networking events. I love meeting new people and learning about their experiences and passions.
+[TBH I love the free food. XD]
+
+Have a good one, aight?
