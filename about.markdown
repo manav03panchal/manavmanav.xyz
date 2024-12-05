@@ -9,7 +9,7 @@ Hey there!
 My name's _`Manav`_. I'm a senior at the _`University of Alberta, Canada`_,
 where I'm pursuing a _`BSc Specialization in Computing Science`_.
 
-I'm enjoy all things code! From Infrastructure to DevOps to Software Development.
+I enjoy all things code! From Infrastructure to DevOps to Software Development.
 
 Previously, I worked at **QBoost**, a Laboratory QMC company, as a Database Developer Intern. There, I got my hands dirty building their customizable platform that adapted to each client's unique needs.
 
