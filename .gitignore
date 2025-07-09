@@ -1,5 +1,19 @@
-_site
-.sass-cache
-.jekyll-cache
+# Ignore the generated site
+_site/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-vendor
+
+# Ignore local dependencies
+vendor/
+.bundle/
+Gemfile.lock
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files and temp files
+*.log
+*.tmp
+*.swp
