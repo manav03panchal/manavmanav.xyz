@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Me
-permalink: /about
+permalink: /about/index.html
 ---
 
 Ramblings. Fueled by caffeine.
