@@ -1,88 +1,56 @@
 /**
- * Theme Toggle with Game of Life Integration
- * The toggle button serves as a spawn point for Game of Life patterns
+ * Life Spawner for Game of Life
+ * A random positioned button that spawns life patterns when clicked
  */
 
-class ThemeToggle {
+class LifeSpawner {
   constructor() {
-    this.isDark =
-      localStorage.getItem("theme") === "dark" ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
     this.gameOfLife = null;
     this.button = null;
+    this.cellSize = 8; // Match the Game of Life cell size
 
     this.init();
   }
 
   init() {
-    this.createToggleButton();
-    this.applyTheme();
+    this.createSpawnButton();
     this.bindEvents();
     this.waitForGameOfLife();
   }
 
-  createToggleButton() {
+  createSpawnButton() {
     this.button = document.createElement("button");
-    this.button.className = "theme-toggle";
-    this.button.textContent = this.isDark ? "LIGHT" : "DARK";
-    this.button.setAttribute("aria-label", "Toggle theme");
-    this.button.setAttribute("title", "Toggle theme (and spawn life!)");
+    this.button.className = "life-spawner";
+    this.button.setAttribute("aria-label", "Spawn life");
+    this.button.setAttribute("title", "Click to spawn life!");
+
+    // Random position on the screen
+    const randomX = Math.random() * (window.innerWidth - this.cellSize);
+    const randomY = Math.random() * (window.innerHeight - this.cellSize);
+
     // Apply styles directly to ensure they override any CSS
     Object.assign(this.button.style, {
       position: "fixed",
-      top: "15px",
-      right: "15px",
-      width: "44px",
-      height: "44px",
-      border: "1px solid",
-      borderColor: "currentColor",
-      background: "transparent",
+      top: `${randomY}px`,
+      left: `${randomX}px`,
+      width: `${this.cellSize}px`,
+      height: `${this.cellSize}px`,
+      border: "none",
+      background: "#333333",
       cursor: "pointer",
       zIndex: "1000",
       transition: "all 0.2s ease",
-      fontFamily: "inherit",
-      fontSize: "10px",
-      textTransform: "uppercase",
-      letterSpacing: "0.05em",
-      color: "inherit",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
       margin: "0",
       padding: "0",
       outline: "none",
+      opacity: "0.8",
     });
 
     document.body.appendChild(this.button);
   }
 
-  applyTheme() {
-    if (this.isDark) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
-
-    // Update button text
-    if (this.button) {
-      this.button.textContent = this.isDark ? "LIGHT" : "DARK";
-    }
-
-    // Save preference
-    localStorage.setItem("theme", this.isDark ? "dark" : "light");
-
-    // Emit custom event for other components
-    document.dispatchEvent(
-      new CustomEvent("themeChanged", {
-        detail: { isDark: this.isDark },
-      }),
-    );
-  }
-
-  toggle() {
-    this.isDark = !this.isDark;
-    this.applyTheme();
-    this.spawnLifeAtToggle();
+  spawnLife() {
+    this.spawnLifeAtButton();
   }
 
   waitForGameOfLife() {
@@ -97,7 +65,7 @@ class ThemeToggle {
     checkGameOfLife();
   }
 
-  spawnLifeAtToggle() {
+  spawnLifeAtButton() {
     if (!this.gameOfLife || !this.button) return;
 
     const rect = this.button.getBoundingClientRect();
@@ -108,16 +76,16 @@ class ThemeToggle {
     const col = Math.floor(centerX / this.gameOfLife.cellSize);
     const row = Math.floor(centerY / this.gameOfLife.cellSize);
 
-    // Create an explosion of life patterns around the toggle
+    // Create an explosion of life patterns around the button
     this.createLifeExplosion(row, col);
 
     // Brief visual feedback
-    this.button.style.boxShadow = this.isDark
-      ? "0 0 20px #ffff00"
-      : "0 0 20px #000000";
+    this.button.style.boxShadow = "0 0 20px #bb88ff";
+    this.button.style.background = "#bb88ff";
 
     setTimeout(() => {
       this.button.style.boxShadow = "none";
+      this.button.style.background = "#333333";
     }, 300);
   }
 
@@ -230,44 +198,18 @@ class ThemeToggle {
   }
 
   bindEvents() {
-    // Toggle button click
+    // Spawn button click
     this.button.addEventListener("click", (e) => {
       e.preventDefault();
-      this.toggle();
+      this.spawnLife();
     });
-
-    // Keyboard shortcut
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "t" || e.key === "T") {
-        if (!e.ctrlKey && !e.metaKey && !e.altKey) {
-          // Only if not typing in an input
-          if (
-            document.activeElement.tagName !== "INPUT" &&
-            document.activeElement.tagName !== "TEXTAREA"
-          ) {
-            e.preventDefault();
-            this.toggle();
-          }
-        }
-      }
-    });
-
-    // System theme change detection
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        if (!localStorage.getItem("theme")) {
-          this.isDark = e.matches;
-          this.applyTheme();
-        }
-      });
 
     // Button hover effects
     this.button.addEventListener("mouseenter", () => {
       Object.assign(this.button.style, {
-        transform: "scale(1.05)",
-        background: "currentColor",
-        color: this.isDark ? "#0a0a0a" : "#ffffff",
+        transform: "scale(1.2)",
+        background: "#443355",
+        opacity: "1.0",
       });
 
       // Subtle life spawn on hover
@@ -292,8 +234,8 @@ class ThemeToggle {
     this.button.addEventListener("mouseleave", () => {
       Object.assign(this.button.style, {
         transform: "scale(1)",
-        background: "transparent",
-        color: "inherit",
+        background: "#333333",
+        opacity: "0.8",
       });
     });
 
@@ -313,6 +255,14 @@ class ThemeToggle {
         clickCount = 0;
         this.chaosMode();
       }
+    });
+
+    // Reposition button on window resize
+    window.addEventListener("resize", () => {
+      const randomX = Math.random() * (window.innerWidth - this.cellSize);
+      const randomY = Math.random() * (window.innerHeight - this.cellSize);
+      this.button.style.left = `${randomX}px`;
+      this.button.style.top = `${randomY}px`;
     });
   }
 
@@ -341,7 +291,7 @@ class ThemeToggle {
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  new ThemeToggle();
+  new LifeSpawner();
 });
 
 // Add CSS animation for chaos mode
@@ -349,7 +299,7 @@ const style = document.createElement("style");
 style.textContent = `
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+    50% { transform: scale(1.5); }
   }
 `;
 document.head.appendChild(style);

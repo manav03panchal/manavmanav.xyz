@@ -15,11 +15,10 @@ class GameOfLife {
     this.animationId = null;
     this.lastUpdate = 0;
     this.updateInterval = 150; // milliseconds
-    this.opacity = 0.03; // Very subtle
+    this.opacity = 0.08; // More visible purple
     this.generation = 0;
-    this.isDarkMode = false;
-    this.cellColor = "#000000";
-    this.borderColor = "#ffff00";
+    this.cellColor = "#2a1a3a";
+    this.borderColor = "#bb88ff";
     this.maxGenerations = 500; // Reset after this many generations
     this.isRunning = true;
     this.performanceMode = false;
@@ -32,6 +31,7 @@ class GameOfLife {
 
   init() {
     this.createCanvas();
+    this.updateTheme();
     this.setupGrid();
     this.seedGrid();
     this.bindEvents();
@@ -284,13 +284,13 @@ class GameOfLife {
           const size = this.cellSize - 1;
 
           // Draw darker cell fill
-          this.ctx.fillStyle = this.isDarkMode ? "#1a1a1a" : "#333333";
+          this.ctx.fillStyle = "#2a1a3a";
           this.ctx.fillRect(x, y, size, size);
 
-          // Draw neon yellow border
+          // Draw purple border
           this.ctx.strokeStyle = this.borderColor;
-          this.ctx.lineWidth = 0.5;
-          this.ctx.globalAlpha = 0.6;
+          this.ctx.lineWidth = 0.8;
+          this.ctx.globalAlpha = 0.8;
           this.ctx.strokeRect(x, y, size, size);
           this.ctx.globalAlpha = 1.0;
         }
@@ -309,29 +309,14 @@ class GameOfLife {
   }
 
   updateTheme() {
-    this.isDarkMode = document.body.classList.contains("dark-mode");
-    this.cellColor = this.isDarkMode ? "#1a1a1a" : "#333333";
-    this.borderColor = "#ffff00";
-    this.canvas.style.opacity = this.isDarkMode ? "0.08" : this.opacity;
+    this.cellColor = "#2a1a3a";
+    this.borderColor = "#bb88ff";
+    this.canvas.style.opacity = "0.12";
   }
 
   bindEvents() {
     window.addEventListener("resize", () => {
       this.resize();
-    });
-
-    // Watch for theme changes
-    const observer = new MutationObserver(() => {
-      this.updateTheme();
-    });
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    // Listen for theme change events
-    document.addEventListener("themeChanged", () => {
-      this.updateTheme();
     });
 
     // Pause/resume on visibility change
@@ -385,10 +370,10 @@ class GameOfLife {
     let hoverTimeout;
     document.addEventListener("mousemove", (e) => {
       clearTimeout(hoverTimeout);
-      this.canvas.style.opacity = "0.06";
+      this.canvas.style.opacity = "0.10";
 
       hoverTimeout = setTimeout(() => {
-        this.canvas.style.opacity = this.opacity;
+        this.canvas.style.opacity = "0.12";
       }, 1000);
     });
 
@@ -396,10 +381,10 @@ class GameOfLife {
     let scrollTimeout;
     window.addEventListener("scroll", () => {
       clearTimeout(scrollTimeout);
-      this.canvas.style.opacity = "0.02";
+      this.canvas.style.opacity = "0.06";
 
       scrollTimeout = setTimeout(() => {
-        this.canvas.style.opacity = this.opacity;
+        this.canvas.style.opacity = "0.12";
       }, 500);
     });
 

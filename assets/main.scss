@@ -3,3 +3,103 @@
 ---
 
 @import "minima";
+
+// Dark mode as default
+body {
+    background-color: #000000 !important;
+    color: #e0e0e0 !important;
+}
+
+.site-header {
+    background-color: #000000 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+.site-title,
+.site-title:visited {
+    color: #e0e0e0 !important;
+}
+
+.page-link {
+    color: #e0e0e0 !important;
+}
+
+.wrapper {
+    background-color: transparent !important;
+}
+
+.post-content,
+.home {
+    color: #e0e0e0 !important;
+}
+
+.post-title,
+.post-list-heading {
+    color: #e0e0e0 !important;
+}
+
+.post-link {
+    color: #bb88ff !important;
+}
+
+.post-link:visited {
+    color: #9966dd !important;
+}
+
+.post-meta {
+    color: #888 !important;
+}
+
+.site-footer {
+    background-color: #000000 !important;
+    border-top: 1px solid #333 !important;
+    color: #e0e0e0 !important;
+}
+
+// Life spawner button styles
+.life-spawner {
+    font-family: inherit !important;
+    border-radius: 0 !important;
+}
+
+.life-spawner:hover {
+    box-shadow: 0 0 10px rgba(187, 136, 255, 0.5) !important;
+}
+
+.life-spawner:focus {
+    outline: 1px solid #bb88ff !important;
+    outline-offset: 2px !important;
+}
+
+// Game of Life canvas positioning
+#game-of-life {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+}
+
+// Ensure content is readable over the Game of Life background
+.page-content {
+    position: relative;
+    z-index: 1;
+}
+
+// Subtle animation for theme transitions
+body {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+// Accessibility: respect reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
