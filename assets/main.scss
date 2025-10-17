@@ -103,3 +103,61 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+// Mermaid diagram dark theme styling
+.mermaid {
+    background-color: transparent !important;
+
+    svg {
+        background-color: transparent !important;
+        max-width: 100%;
+        height: auto;
+    }
+
+    // Class boxes
+    .node rect,
+    .cluster rect {
+        fill: #1a1a1a !important;
+        stroke: #bb88ff !important;
+        stroke-width: 2px !important;
+    }
+
+    // Text
+    .nodeLabel,
+    .cluster-label,
+    text {
+        fill: #e0e0e0 !important;
+        color: #e0e0e0 !important;
+    }
+
+    // Edges/arrows
+    .edgePath .path {
+        stroke: #888 !important;
+        stroke-width: 2px !important;
+    }
+
+    .arrowheadPath {
+        fill: #888 !important;
+        stroke: #888 !important;
+    }
+
+    // Edge labels
+    .edgeLabel {
+        background-color: #000000 !important;
+
+        rect {
+            fill: #000000 !important;
+            stroke: none !important;
+        }
+
+        span {
+            color: #e0e0e0 !important;
+        }
+    }
+
+    // Relationship lines
+    line.messageLine0,
+    line.messageLine1 {
+        stroke: #888 !important;
+    }
+}
