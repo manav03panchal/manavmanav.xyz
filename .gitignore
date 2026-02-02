@@ -1,19 +1,35 @@
-# Ignore the generated site
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
+# Build output
+dist/
 
-# Ignore local dependencies
-vendor/
-.bundle/
-Gemfile.lock
+# Dependencies
+node_modules/
 
-# Ignore system files
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-Thumbs.db
 
-# Ignore log files and temp files
-*.log
-*.tmp
+# VS Code settings
+.vscode/
+
+# Git-specific files
+.git/
+.gitconfig
+.gitignore
+
+# Other editor/IDE settings
+.idea/
+*.iml
+
+# Temporary/system files
 *.swp
+*.tmp
+Thumbs.db

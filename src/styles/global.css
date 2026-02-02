@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: Geist, sans-serif;
+  --color-secondary: #161614;
+  --color-primary: #f4f5ef;
+}
+* {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth theme transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bg-primary,
+.bg-secondary,
+.text-primary,
+.text-secondary {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode */
+.dark {
+  --color-secondary: #f4f5ef;
+  --color-primary: #161614;
+}
+
+.dark .bg-primary {
+  background-color: #161614;
+}
+
+.dark .bg-secondary {
+  background-color: #f4f5ef;
+}
+
+.dark .text-secondary {
+  color: #f4f5ef;
+}
+
+.dark .text-primary {
+  color: #161614;
+}
+
+.dark .border-secondary\/10 {
+  border-color: rgba(244, 245, 239, 0.1);
+}
+
+.dark .hover\:bg-secondary\/5:hover {
+  background-color: rgba(244, 245, 239, 0.05);
+}
+
+.dark .text-secondary\/60 {
+  color: rgba(244, 245, 239, 0.6);
+}
+
+.dark .text-secondary\/50 {
+  color: rgba(244, 245, 239, 0.5);
+}
+
+.dark .text-secondary\/40 {
+  color: rgba(244, 245, 239, 0.4);
+}
+
+/* Dark mode prose styles */
+.dark .prose {
+  color: #f4f5ef;
+}
+
+.dark .prose h2,
+.dark .prose h3 {
+  color: #f4f5ef;
+}
+
+.dark .prose a {
+  color: #f4f5ef;
+}
+
+.dark .prose code {
+  background: rgba(244, 245, 239, 0.1);
+}
+
+.dark .prose blockquote {
+  border-left-color: #f4f5ef;
+  color: rgba(244, 245, 239, 0.7);
+}
+
+.dark .prose hr {
+  border-top-color: rgba(244, 245, 239, 0.2);
+}
+
+.dark .prose th,
+.dark .prose td {
+  border-bottom-color: rgba(244, 245, 239, 0.1);
+}
+
+.dark .prose details {
+  background: rgba(244, 245, 239, 0.05);
+}
+
+.dark .prose kbd {
+  background: rgba(244, 245, 239, 0.1);
+  border-color: rgba(244, 245, 239, 0.2);
+}
+
+.dark .prose mark {
+  background: rgba(244, 245, 239, 0.2);
+}
