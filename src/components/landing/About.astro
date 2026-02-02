@@ -3,16 +3,16 @@ const { class: className } = Astro.props;
 ---
 <section id="about" class:list={["bg-primary", className]}>
   <div class="px-6 lg:px-8 2xl:max-w-7xl mx-auto">
-    <div class="grid grid-cols-4 text-secondary gap-4">
+    <div class="grid grid-cols-4 text-secondary gap-x-4 gap-y-6">
       <p
-        class="text-xl lg:text-4xl col-span-3 indent-4 lg:indent-32 leading-tight"
+        class="text-base sm:text-xl lg:text-4xl col-span-4 sm:col-span-3 indent-4 lg:indent-32 leading-tight"
         data-aos="fade-up"
         data-aos-duration="800"
       >
         I'm a developer and writer who builds software and writes about technology, systems, and ideas that interest me.
       </p>
       <p
-        class="text-base lg:text-lg col-start-2 leading-snug lg:leading-relaxed"
+        class="text-xs sm:text-base lg:text-lg col-start-1 sm:col-start-2 col-span-2 sm:col-span-2 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
         data-aos-duration="800"
         data-aos-delay="100"
@@ -20,7 +20,7 @@ const { class: className } = Astro.props;
         Open to projects. <a href="mailto:manav03panchal@proton.me" class="underline underline-offset-4">manav03panchal@proton.me</a>
       </p>
       <p
-        class="text-base lg:text-base col-start-4 leading-snug lg:leading-relaxed"
+        class="text-xs sm:text-base lg:text-base col-start-3 sm:col-start-4 col-span-2 sm:col-span-1 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
         data-aos-duration="800"
         data-aos-delay="200"
@@ -28,7 +28,7 @@ const { class: className } = Astro.props;
         Complex problems, new tech, sharing knowledge.
       </p>
       <p
-        class="text-base lg:text-base col-start-4 leading-snug lg:leading-relaxed"
+        class="text-xs sm:text-base lg:text-base col-start-3 sm:col-start-4 col-span-2 sm:col-span-1 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
         data-aos-duration="800"
         data-aos-delay="300"
@@ -36,7 +36,7 @@ const { class: className } = Astro.props;
         Thoughts, tutorials, notes on software.
       </p>
       <p
-        class="text-xl lg:text-5xl col-span-3 col-start-2 mt-4 lg:mt-8 indent-4 lg:indent-32 leading-tight"
+        class="text-lg sm:text-xl lg:text-5xl col-span-4 sm:col-span-3 sm:col-start-2 mt-2 sm:mt-4 lg:mt-8 indent-4 lg:indent-32 leading-tight"
         data-aos="fade-up"
         data-aos-duration="800"
         data-aos-delay="400"
