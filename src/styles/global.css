@@ -8,6 +8,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Scroll enabled by default */
+html, body {
+  overflow-x: hidden;
+}
+
 /* Smooth theme transitions */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;

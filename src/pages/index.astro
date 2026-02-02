@@ -2,11 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/landing/Hero.astro";
 import About from "../components/landing/About.astro";
-import Footer from "../components/landing/Footer.astro";
 ---
 
 <BaseLayout>
-  <Hero />
-  <About />
-  <Footer />
+  <div class="h-screen flex flex-col overflow-hidden" data-landing>
+    <Hero class="flex-shrink-0" />
+    <About class="flex-1 flex flex-col justify-center" />
+  </div>
 </BaseLayout>
+
+<style is:global>
+  body:has([data-landing]) {
+    overflow: hidden;
+  }
+</style>

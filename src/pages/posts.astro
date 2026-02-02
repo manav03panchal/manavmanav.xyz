@@ -5,17 +5,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const posts = (await getCollection('blog')).sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
-
-function calculateAosDuration(index: number) {
-  return 1500 + index * 500;
-}
 ---
 
 <BaseLayout>
-  <section class="bg-primary">
-    <div class="px-8 2xl:max-w-7xl mx-auto py-12">
-      <header data-aos="fade-up" data-aos-duration="600">
-        <div class="flex justify-between items-center mb-8">
+  <div class="min-h-screen bg-primary">
+    <div class="px-6 lg:px-8 2xl:max-w-7xl mx-auto py-8">
+      <!-- Header -->
+      <header class="mb-8" data-aos="fade-up" data-aos-duration="600">
+        <div class="flex justify-between items-center mb-6">
           <a href="/" class="text-secondary/60 text-sm hover:text-secondary transition-colors">
             ← Back
           </a>
@@ -24,54 +21,38 @@ function calculateAosDuration(index: number) {
             <span class="light-icon">Dark</span>
           </button>
         </div>
+        
+        <div class="space-y-2">
+          <div class="h-0.5 bg-secondary" data-aos="fade-up" data-aos-duration="800"></div>
+          <h1 class="text-secondary text-base font-medium" data-aos="fade-up" data-aos-duration="800">
+            <span>Writing</span>
+            <span class="font-bold">Archive</span>
+          </h1>
+        </div>
       </header>
 
-      <div class="space-y-2">
-        <div
-          class="h-0.5 bg-secondary"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-        >
-        </div>
-        <h1
-          class="text-secondary text-base font-medium"
-          data-aos="fade-up"
-          data-aos-duration="1500"
-        >
-          <span>Writing</span>
-          <span class="font-bold">archive</span>
-        </h1>
-      </div>
-
-      <ul
-        class="mx-auto grid grid-cols-1 sm:grid-cols-2 text-secondary lg:grid-cols-4 items-start gap-6 mt-32"
-        role="list"
-      >
-        {
-          posts.map((post, index) => (
-            <li
-              class="flow-root h-full"
-              data-aos="fade-up"
-              data-aos-duration={calculateAosDuration(index)}
-            >
-              <a href={`/blog/${post.slug}`}>
-                <div class="h-full flex flex-col justify-between">
-                  <div>
-                    <p class="group-hover:text-secondary/70 text-secondary text-9xl font-black lg:rotate-90 xl:-translate-x-32 lg:-translate-x-20 lg:mb-8 xl:mb-0 lg:pb-8">
-                      0{index + 1}.
-                    </p>
-                    <p class="italic shrink-0">{new Date(post.data.date).toISOString().split('T')[0]}</p>
-                    <p class="text-xl mt-3 indent-9">{post.data.title}</p>
-                    {post.data.description && (
-                      <p class="text-sm text-secondary/60 mt-2 indent-9">{post.data.description}</p>
-                    )}
-                  </div>
-                </div>
-              </a>
-            </li>
-          ))
-        }
+      <!-- Posts Grid -->
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+        {posts.map((post, index) => (
+          <li data-aos="fade-up" data-aos-duration="800" data-aos-delay={index * 100}>
+            <a href={`/blog/${post.slug}`} class="group block">
+              <div>
+                <p class="text-xs text-secondary/50">
+                  {new Date(post.data.date).toISOString().split('T')[0]}
+                </p>
+                <h2 class="text-lg font-medium text-secondary group-hover:text-secondary/70 transition-colors mt-1">
+                  {post.data.title}
+                </h2>
+                {post.data.description && (
+                  <p class="text-sm text-secondary/60 mt-2 line-clamp-2">
+                    {post.data.description}
+                  </p>
+                )}
+              </div>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
-  </section>
+  </div>
 </BaseLayout>

@@ -1,41 +1,45 @@
 ---
+const { class: className } = Astro.props;
 ---
-<section id="about" class="bg-primary">
-  <div class="px-8 2xl:max-w-7xl mx-auto py-6">
-    <div class="grid grid-cols-1 lg:grid-cols-4 text-secondary gap-6 text-lg">
+<section id="about" class:list={["bg-primary", className]}>
+  <div class="px-6 lg:px-8 2xl:max-w-7xl mx-auto">
+    <div class="grid grid-cols-4 text-secondary gap-4">
       <p
-        class="text-3xl lg:col-span-3 lg:text-5xl indent-32 lg:indent-32"
+        class="text-xl lg:text-4xl col-span-3 indent-4 lg:indent-32 leading-tight"
         data-aos="fade-up"
-        data-aos-duration="2000"
+        data-aos-duration="800"
       >
         I'm a developer and writer who builds software and writes about technology, systems, and ideas that interest me.
       </p>
       <p
-        class="text-lg lg:col-start-2 leading-relaxed underline underline-offset-4"
+        class="text-base lg:text-lg col-start-2 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
-        data-aos-duration="2500"
+        data-aos-duration="800"
+        data-aos-delay="100"
       >
-        Currently open to interesting projects and collaborations. Feel free to reach out.
-        <a href="mailto:manav03panchal@proton.me" target="_blank" rel="noopener noreferrer">manav03panchal@proton.me</a>
+        Open to projects. <a href="mailto:manav03panchal@proton.me" class="underline underline-offset-4">manav03panchal@proton.me</a>
       </p>
       <p
-        class="lg:col-start-4 leading-relaxed"
+        class="text-base lg:text-base col-start-4 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
-        data-aos-duration="2500"
+        data-aos-duration="800"
+        data-aos-delay="200"
       >
-        I enjoy working on complex problems, learning new technologies, and sharing what I learn through writing.
+        Complex problems, new tech, sharing knowledge.
       </p>
       <p
-        class="lg:col-start-4 leading-relaxed"
+        class="text-base lg:text-base col-start-4 leading-snug lg:leading-relaxed"
         data-aos="fade-up"
-        data-aos-duration="3000"
+        data-aos-duration="800"
+        data-aos-delay="300"
       >
-        This site is where I publish my thoughts, tutorials, and notes on software development.
+        Thoughts, tutorials, notes on software.
       </p>
       <p
-        class="text-3xl lg:col-span-3 lg:text-7xl lg:col-start-2 lg:mt-48 indent-32 lg:indent-32"
+        class="text-xl lg:text-5xl col-span-3 col-start-2 mt-4 lg:mt-8 indent-4 lg:indent-32 leading-tight"
         data-aos="fade-up"
-        data-aos-duration="3000"
+        data-aos-duration="800"
+        data-aos-delay="400"
       >
         Building things that matter, one line at a time.
       </p>
