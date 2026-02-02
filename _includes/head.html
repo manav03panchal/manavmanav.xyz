@@ -1,32 +1,89 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
   {%- seo -%}
+
+  <!-- Theme toggle - runs before CSS to prevent flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <script src="{{ "/assets/js/game-of-life.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/theme-toggle.js" | relative_url }}"></script>
+
+  <!-- Theme toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+
+      function updateIcons(theme) {
+        const sun = toggle.querySelector('.sun-icon');
+        const moon = toggle.querySelector('.moon-icon');
+        if (sun && moon) {
+          sun.style.display = theme === 'light' ? 'none' : 'inline';
+          moon.style.display = theme === 'light' ? 'inline' : 'none';
+        }
+      }
+
+      updateIcons(document.documentElement.getAttribute('data-theme') || 'dark');
+
+      toggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcons(next);
+      });
+
+      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          const theme = e.matches ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          updateIcons(theme);
+        }
+      });
+    });
+  </script>
+
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
     mermaid.initialize({
       startOnLoad: true,
       theme: 'dark',
-      themeVariables: {
+      themeVariables: isDark ? {
         primaryColor: '#1a1a1a',
         primaryTextColor: '#e0e0e0',
-        primaryBorderColor: '#bb88ff',
-        lineColor: '#888',
-        secondaryColor: '#1a1a1a',
-        tertiaryColor: '#000000',
+        primaryBorderColor: '#555',
+        lineColor: '#555',
+        secondaryColor: '#111',
+        tertiaryColor: '#0a0a0a',
         background: '#000000',
-        mainBkg: '#1a1a1a',
-        secondBkg: '#000000',
-        mainContrastColor: '#e0e0e0',
-        darkMode: true,
-        fontFamily: 'inherit'
+        mainBkg: '#0a0a0a',
+        secondBkg: '#111',
+        fontFamily: 'Iosevka, monospace'
+      } : {
+        primaryColor: '#f0f0f0',
+        primaryTextColor: '#1a1a1a',
+        primaryBorderColor: '#999',
+        lineColor: '#999',
+        secondaryColor: '#e8e8e8',
+        tertiaryColor: '#fafafa',
+        background: '#fafafa',
+        mainBkg: '#f0f0f0',
+        secondBkg: '#e8e8e8',
+        fontFamily: 'Iosevka, monospace'
       }
     });
   </script>
+
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}

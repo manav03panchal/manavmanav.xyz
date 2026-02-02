@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+<div class="reading-progress" id="reading-progress"></div>
+
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
@@ -11,13 +13,26 @@ layout: default
         {{ page.date | date: date_format }}
       </time>
       {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}</p>
+        <span class="post-author"> · {{ page.author }}</span>
+      {%- endif -%}
+      {%- assign words = content | number_of_words -%}
+      {%- assign minutes = words | divided_by: 200 -%}
+      {%- if minutes < 1 %}{% assign minutes = 1 %}{% endif -%}
+      <span class="reading-time">{{ minutes }} min read</span>
+    </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
+
+  {%- if page.tags.size > 0 -%}
+  <div class="post-tags">
+    {%- for tag in page.tags -%}
+      <span class="tag">{{ tag }}</span>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
 
   {%- if site.disqus.shortname -%}
     {%- include disqus_comments.html -%}
@@ -25,3 +40,29 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+
+<script>
+  // Reading progress bar
+  (function() {
+    const progressBar = document.getElementById('reading-progress');
+    const article = document.querySelector('.post-content');
+
+    if (!progressBar || !article) return;
+
+    function updateProgress() {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+
+      const start = articleTop - windowHeight;
+      const end = articleTop + articleHeight - windowHeight;
+      const progress = Math.min(Math.max((scrollTop - start) / (end - start), 0), 1);
+
+      progressBar.style.width = (progress * 100) + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  })();
+</script>

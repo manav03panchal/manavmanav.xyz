@@ -30,6 +30,11 @@ github_username: manav03panchal
 theme: minima
 plugins:
   - jekyll-feed
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  parse_block_html: true
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

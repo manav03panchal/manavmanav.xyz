@@ -1,14 +1,19 @@
 ---
 layout: page
 title: About Me
-permalink: /about/index.html
+permalink: /about/
 ---
-Hi!
 
-My name's Manav.
+I'm Manav.
 
-I ramble, and hang out with GOAT-ed people so I can learn more from them :)
+CS undergrad. I like building things and understanding how they work under the hood.
 
-I am a Computing Science undergrad, but I am open to chat about anything.
+Currently interested in:
+- Systems programming
+- Databases
+- Design patterns
 
-> Thanks and have a good day!
+I write here occasionally to organize my thoughts and document what I learn.
+
+Find me on [GitHub](https://github.com/manav03panchal).
+

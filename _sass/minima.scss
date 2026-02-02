@@ -6,6 +6,7 @@
     src: url("../assets/fonts/Iosevka-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -13,35 +14,7 @@
     src: url("../assets/fonts/Iosevka-Bold.woff") format("woff");
     font-weight: bold;
     font-style: normal;
-}
-
-// Define other font faces for different weights
-@font-face {
-    font-family: "Iosevka";
-    src: url("../assets/fonts/Iosevka-ExtraBold.woff") format("woff");
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Iosevka";
-    src: url("../assets/fonts/Iosevka-ExtraLight.woff") format("woff");
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Iosevka";
-    src: url("../assets/fonts/Iosevka-Heavy.woff") format("woff");
-    font-weight: 900;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Iosevka";
-    src: url("../assets/fonts/Iosevka-Light.woff") format("woff");
-    font-weight: 300;
-    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -49,6 +22,7 @@
     src: url("../assets/fonts/Iosevka-Medium.woff") format("woff");
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -56,46 +30,69 @@
     src: url("../assets/fonts/Iosevka-SemiBold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
-@font-face {
-    font-family: "Iosevka";
-    src: url("../assets/fonts/Iosevka-Thin.woff") format("woff");
-    font-weight: 100;
-    font-style: normal;
-}
-
-$base-font-family: "Iosevka" !default;
+// Typography
+$base-font-family: "Iosevka", monospace !default;
 $base-font-size: 16px !default;
 $base-font-weight: 400 !default;
 $small-font-size: $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+$base-line-height: 1.6 !default;
 
 $spacing-unit: 30px !default;
 
-$text-color: white !default;
-$background-color: black !default;
-$brand-color: red !default;
+// Theme colors using CSS custom properties
+// Dark theme (default)
+:root {
+    --bg-color: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #111111;
+    --text-color: #e0e0e0;
+    --text-muted: #888888;
+    --text-faint: #555555;
+    --brand-color: #e0e0e0;
+    --brand-hover: #ffffff;
+    --border-color: #222222;
+    --border-light: #333333;
+    --code-bg: #0a0a0a;
+    --selection-bg: #444444;
+    --selection-text: #ffffff;
+}
 
-$grey-color: blue !default;
-$grey-color-light: black !default;
-$grey-color-dark: white !default;
+// Light theme
+[data-theme="light"] {
+    --bg-color: #fafafa;
+    --bg-secondary: #f0f0f0;
+    --bg-tertiary: #e8e8e8;
+    --text-color: #1a1a1a;
+    --text-muted: #666666;
+    --text-faint: #999999;
+    --brand-color: #1a1a1a;
+    --brand-hover: #000000;
+    --border-color: #dddddd;
+    --border-light: #cccccc;
+    --code-bg: #f4f4f4;
+    --selection-bg: #cccccc;
+    --selection-text: #000000;
+}
+
+// Legacy variables for compatibility
+$text-color: var(--text-color);
+$background-color: var(--bg-color);
+$brand-color: var(--brand-color);
+$grey-color: var(--text-muted);
+$grey-color-light: var(--border-color);
+$grey-color-dark: var(--text-color);
 
 $table-text-align: left !default;
 
 // Width of the content area
-$content-width: 800px !default;
+$content-width: 720px !default;
 
 $on-palm: 600px !default;
 $on-laptop: 800px !default;
 
-// Use media queries like this:
-// @include media-query($on-palm) {
-//   .wrapper {
-//     padding-right: $spacing-unit / 2;
-//     padding-left: $spacing-unit / 2;
-//   }
-// }
 @mixin media-query($device) {
     @media screen and (max-width: $device) {
         @content;
