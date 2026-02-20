@@ -108,6 +108,7 @@
 }
 
 html {
+    scroll-behavior: smooth;
     font-family: "Iosevka Aile", sans-serif;
     -webkit-text-size-adjust: 100%;
     --line-height: 1.7rem;
@@ -117,6 +118,7 @@ html {
 }
 
 body {
+    overflow-x: hidden;
     max-width: 80ch;
     padding: 2ch;
     margin-left: auto;
@@ -148,6 +150,7 @@ footer {
 }
 
 article > *, article > section > *, figure.blockquote { max-width: 55ch; }
+article { overflow-wrap: break-word; }
 article > section, article > figure, article > section > figure { max-width: 80ch; }
 
 h1     { margin-bottom: 0.75rem; }

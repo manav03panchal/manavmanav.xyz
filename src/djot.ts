@@ -12,6 +12,7 @@ import {
   HasAttributes,
   Heading,
   Image,
+  Link,
   OrderedList,
   Para,
   Section,
@@ -63,6 +64,17 @@ export function render(doc: Doc, ctx: RenderCtx): HtmlString {
           : `${children}`;
         return `\n<${tag}${r.renderAttributes(node)}>${children_anchored}</${tag}>\n`;
       }
+    },
+    link: (node: Link, r: HTMLRenderer): string => {
+      const dest = node.destination ?? "";
+      const isExternal = dest.startsWith("http://") ||
+        dest.startsWith("https://");
+      if (isExternal) {
+        node.attributes = node.attributes ?? {};
+        node.attributes["target"] = "_blank";
+        node.attributes["rel"] = "noopener noreferrer";
+      }
+      return r.renderAstNodeDefault(node);
     },
     ordered_list: (node: OrderedList, r: HTMLRenderer): string => {
       if (node.style === "1)") add_class(node, "callout");
@@ -215,6 +227,9 @@ ${pre}
     },
     url: (node: Url, r: HTMLRenderer) => {
       add_class(node, "url");
+      node.attributes = node.attributes ?? {};
+      node.attributes["target"] = "_blank";
+      node.attributes["rel"] = "noopener noreferrer";
       return r.renderAstNodeDefault(node);
     },
   };
