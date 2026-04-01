@@ -62,7 +62,9 @@ export function render(doc: Doc, ctx: RenderCtx): HtmlString {
         const children_anchored = id
           ? `<a href="#${id}">${children}</a>`
           : `${children}`;
-        return `\n<${tag}${r.renderAttributes(node)}>${children_anchored}</${tag}>\n`;
+        return `\n<${tag}${
+          r.renderAttributes(node)
+        }>${children_anchored}</${tag}>\n`;
       }
     },
     link: (node: Link, r: HTMLRenderer): string => {

@@ -64,11 +64,17 @@ export function highlight(
     return `<span class="line${cls}">${it}${calls}</span>`;
   })
     .join("\n");
-  return html`\n<pre><code>${new HtmlString(lines)}</code></pre>\n`;
+  return html`
+    \\n<pre><code>${new HtmlString(lines)}</code></pre>\\n
+  `;
 }
 
 function add_spans(source: string, language?: string): HtmlString {
-  if (!language || language === "adoc") return html`${source}`;
+  if (!language || language === "adoc") {
+    return html`
+      ${source}
+    `;
+  }
   if (language == "console") return add_spans_console(source);
   try {
     const res = hljs.highlight(source, { language, ignoreIllegals: true });
@@ -76,7 +82,9 @@ function add_spans(source: string, language?: string): HtmlString {
   } catch (e) {
     console.error(e);
     console.error(`\n    hljs failed for language=${language}\n`);
-    return html`${source}`;
+    return html`
+      ${source}
+    `;
   }
 }
 
@@ -85,20 +93,28 @@ function add_spans_console(source: string): HtmlString {
   const lines = source.trimEnd().split("\n").map((line) => {
     if (cont) {
       cont = line.endsWith("\\");
-      return html`${line}\n`;
+      return html`
+        ${line}\\n
+      `;
     }
     if (line.startsWith("$ ")) {
       cont = line.endsWith("\\");
-      return html`<span class="hl-title function_">$</span> ${
-        line.substring(2)
-      }\n`;
+      return html`
+        <span class="hl-title function_">$</span> ${line.substring(2)}\\n
+      `;
     }
     if (line.startsWith("#")) {
-      return html`<span class="hl-comment">${line}</span>\n`;
+      return html`
+        <span class="hl-comment">${line}</span>\\n
+      `;
     }
-    return html`<span class="hl-output">${line}</span>\n`;
+    return html`
+      <span class="hl-output">${line}</span>\\n
+    `;
   });
-  return html`${lines}`;
+  return html`
+    ${lines}
+  `;
 }
 
 function parse_highlight_spec(spec?: string): number[] {
