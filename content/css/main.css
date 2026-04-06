@@ -235,6 +235,17 @@ figure.code-block > pre > code {
     counter-reset: line;
     line-height: 1.2;
 }
+figure.code-block { position: relative; }
+figure.code-block > button.copy-code {
+    position: absolute; top: 0.4em; right: 0.4em;
+    padding: 0.2em 0.5em;
+    font-family: "Iosevka SS14", monospace; font-size: 0.75rem;
+    background: var(--block-bg); color: var(--fg-muted);
+    border: 1px solid var(--block-border); border-radius: 4px;
+    cursor: pointer; opacity: 0; transition: opacity 0.15s;
+}
+figure.code-block:hover > button.copy-code { opacity: 1; }
+figure.code-block > button.copy-code:focus { opacity: 1; }
 figure.code-block > pre > code > .line { counter-increment: line; }
 figure.code-block > pre > code > .line:before {
     content: counter(line);

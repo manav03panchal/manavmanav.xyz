@@ -3,7 +3,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { escapeHtml, h, Raw, render, VNode } from "./tsx.ts";
 import { Post as PostData } from "./main.ts";
-import { FeedEntry as FeedEntryData } from "./blogroll.ts";
 
 const site_url = "https://manavmanav.xyz";
 const blurb = "manav's blog";
@@ -48,7 +47,6 @@ function FontLinks() {
 
 function Base({ children, title, path, description, extra_css }: {
   children?: VNode[];
-  src: string;
   title: string;
   description: string;
   path: string;
@@ -79,7 +77,11 @@ function Base({ children, title, path, description, extra_css }: {
           <nav>
             <a class="title" href="/">manav</a>
             <a href="/about.html">About</a>
-            <button type id="theme-toggle" aria-label="Toggle dark mode">
+            <button
+              type="button"
+              id="theme-toggle"
+              aria-label="Toggle dark mode"
+            >
               <Raw
                 unsafe={`<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`}
               />
@@ -179,31 +181,26 @@ export function Post({ post }: { post: PostData }) {
       <article>
         <Raw unsafe={post.content.value} />
       </article>
-    </Base>
-  );
-}
-
-export function BlogRoll({ posts }: { posts: FeedEntryData[] }) {
-  function domain(url: string): string {
-    return new URL(url).host;
-  }
-
-  const list_items = posts.map((post) => (
-    <li>
-      <span class="meta">
-        <Time date={post.date} />, {domain(post.url)}
-      </span>
-      <h2>
-        <a href={post.url}>{post.title}</a>
-      </h2>
-    </li>
-  ));
-
-  return (
-    <Base path="" title="manav" description={blurb} src="/src/templates.tsx">
-      <ul class="post-list">
-        {list_items}
-      </ul>
+      <script>
+        <Raw unsafe={`
+(function(){
+  document.querySelectorAll('figure.code-block').forEach(function(fig){
+    var btn=document.createElement('button');
+    btn.className='copy-code';btn.type='button';btn.setAttribute('aria-label','Copy code');
+    btn.textContent='Copy';
+    fig.appendChild(btn);
+    btn.addEventListener('click',function(){
+      var code=fig.querySelector('code');
+      var lines=Array.from(code.querySelectorAll('.line')).map(function(l){return l.textContent;});
+      navigator.clipboard.writeText(lines.join('\\n')).then(function(){
+        btn.textContent='Copied!';
+        setTimeout(function(){btn.textContent='Copy';},2000);
+      });
+    });
+  });
+})();
+`} />
+      </script>
     </Base>
   );
 }
@@ -226,23 +223,6 @@ function yyyy_mm_dd(date: Date): string {
 
 export function time_html(date: Date, className: string) {
   return render(<Time date={date} className={className} />);
-}
-
-export function Redirect({ path }: { path: string }) {
-  return (
-    <html lang="en-US">
-      <meta charset="utf-8" />
-      <title>Redirecting…</title>
-      <link rel="canonical" href={path} />
-      <script>
-        <Raw unsafe={`location="${path}"`} />
-      </script>
-      <meta http-equiv="refresh" content={`0; url=${path}`} />
-      <meta name="robots" content="noindex" />
-      <h1>Redirecting…</h1>
-      <a href={path}>Click here if you are not redirected.</a>
-    </html>
-  );
 }
 
 export function feed_xml(posts: PostData[]): string {

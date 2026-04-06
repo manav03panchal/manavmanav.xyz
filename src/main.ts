@@ -8,12 +8,10 @@ import {
   Post,
   PostList,
 } from "./templates.tsx";
-import { spell } from "./spell.ts";
 
 async function main() {
   const params = {
     update: false,
-    spell: false,
     profile: false,
     filter: "",
   };
@@ -28,20 +26,11 @@ async function main() {
     return;
   }
 
-  if (subcommand === "spell") {
-    spell(Deno.args.at(1));
-    return;
-  }
-
   let i = 1;
   for (; i < Deno.args.length; i++) {
     switch (Deno.args[i]) {
       case "--update": {
         params.update = true;
-        break;
-      }
-      case "--spell": {
-        params.spell = true;
         break;
       }
       case "--profile": {
@@ -73,7 +62,7 @@ function fatal(message: string) {
 }
 
 async function watch(params: { filter: string }) {
-  let signal = Promise.withResolvers();
+  let signal = Promise.withResolvers<boolean>();
   (async () => {
     let build_id = 0;
     while (await signal.promise) {
@@ -82,7 +71,6 @@ async function watch(params: { filter: string }) {
       build_id += 1;
       await build({
         update: true,
-        spell: false,
         profile: false,
         filter: params.filter,
       });
@@ -116,7 +104,6 @@ class Ctx {
 
 async function build(params: {
   update: boolean;
-  spell: boolean;
   profile: boolean;
   filter: string;
 }) {
@@ -214,7 +201,7 @@ async function update_file(path: string, content: Uint8Array | string) {
 async function update_path(path: string) {
   if (path.endsWith("*")) {
     const dir = path.replace("*", "");
-    const futs = [];
+    const futs: Promise<void>[] = [];
     for await (const entry of Deno.readDir(`content/${dir}`)) {
       if (entry.isFile) {
         futs.push(update_path(`${dir}/${entry.name}`));

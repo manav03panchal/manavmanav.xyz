@@ -6,18 +6,14 @@
   "tasks": {
     "build": "                deno run --lock --cached-only --allow-write=./out --allow-read --allow-run --allow-net --allow-import         ./src/main.ts build --profile",
     "watch": "rm -rf ./out && deno run --lock --cached-only --allow-write=./out --allow-read --allow-run --allow-net --allow-import --watch ./src/main.ts watch",
-    "open": "sleep 1 && live-server ./out/www --host=127.0.0.1 --port=8080 & open 'http://127.0.0.1:8080'",
+    "open": "sleep 1 && live-server ./out/www --host=127.0.0.1 --port=8080 --no-browser",
     "serve": "deno task watch & deno task open",
-    "touch": "deno run --lock --cached-only --allow-write=./content/posts ./src/main.ts touch",
-    "spell": "deno run --lock --cached-only  --allow-read=./content/posts --allow-write=./content/posts --allow-env --allow-run ./src/main.ts spell"
+    "touch": "deno run --lock --cached-only --allow-write=./content/posts ./src/main.ts touch"
   },
   "imports": {
     "@highlightjs/": "https://unpkg.com/@highlightjs/cdn-assets@11.6.0/es/",
 
     "@std/async/debounce": "https://raw.githubusercontent.com/denoland/std/refs/tags/release-2025.03.04/async/debounce.ts",
-    "@rss": "https://raw.githubusercontent.com/MikaelPorttila/rss/refs/tags/1.0.3/mod.ts",
-    "jsr:@maxim-mazurok/sax-ts@1.2.13": "https://raw.githubusercontent.com/Maxim-Mazurok/sax-ts/refs/tags/v1.2.13/src/sax.ts",
-
     "@djot/": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/",
     "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/ast": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/ast.ts",
     "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/attributes": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/attributes.ts",
