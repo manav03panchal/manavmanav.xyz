@@ -12,16 +12,6 @@
   },
   "imports": {
     "@highlightjs/": "https://unpkg.com/@highlightjs/cdn-assets@11.6.0/es/",
-
-    "@std/async/debounce": "https://raw.githubusercontent.com/denoland/std/refs/tags/release-2025.03.04/async/debounce.ts",
-    "@djot/": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/ast": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/ast.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/attributes": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/attributes.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/block": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/block.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/event": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/event.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/find": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/find.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/inline": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/inline.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/options": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/options.ts",
-    "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/parse": "https://raw.githubusercontent.com/jgm/djot.js/@djot/djot@0.3.2/src/parse.ts"
+    "@std/async/debounce": "https://raw.githubusercontent.com/denoland/std/refs/tags/release-2025.03.04/async/debounce.ts"
   }
 }

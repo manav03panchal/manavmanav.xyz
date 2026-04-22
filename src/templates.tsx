@@ -178,17 +178,38 @@ export function Post({ post }: { post: PostData }) {
       <script>
         <Raw unsafe={`
 (function(){
+  var ICONS='<svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext){
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');
+      ta.style.position='fixed';ta.style.top='-9999px';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy')?res():rej();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
   document.querySelectorAll('figure.code-block').forEach(function(fig){
     var btn=document.createElement('button');
-    btn.className='copy-code';btn.type='button';btn.setAttribute('aria-label','Copy code');
-    btn.textContent='Copy';
+    btn.className='copy-code';btn.type='button';
+    btn.setAttribute('aria-label','Copy code');
+    btn.title='Copy';
+    btn.innerHTML=ICONS;
     fig.appendChild(btn);
     btn.addEventListener('click',function(){
       var code=fig.querySelector('code');
-      var lines=Array.from(code.querySelectorAll('.line')).map(function(l){return l.textContent;});
-      navigator.clipboard.writeText(lines.join('\\n')).then(function(){
-        btn.textContent='Copied!';
-        setTimeout(function(){btn.textContent='Copy';},2000);
+      if(!code)return;
+      copy(code.innerText).then(function(){
+        btn.classList.add('ok');
+        btn.title='Copied';
+        setTimeout(function(){btn.classList.remove('ok');btn.title='Copy';},1500);
+      }).catch(function(){
+        btn.classList.add('err');
+        btn.title='Copy failed';
+        setTimeout(function(){btn.classList.remove('err');btn.title='Copy';},1500);
       });
     });
   });

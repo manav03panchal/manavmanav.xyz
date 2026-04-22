@@ -1,5 +1,5 @@
 import { debounce } from "@std/async/debounce";
-import * as djot from "./djot.ts";
+import * as md from "./markdown.ts";
 import {
   feed_xml,
   html_ugly,
@@ -20,9 +20,9 @@ async function main() {
   if (subcommand === "touch") {
     const slug = Deno.args[1];
     const date = new Date().toISOString().split("T")[0];
-    const path = `./content/posts/${date}-${slug}.dj`;
+    const path = `./content/posts/${date}-${slug}.md`;
     console.log(`touching ${path}`);
-    await Deno.writeTextFile(path, "#\n");
+    await Deno.writeTextFile(path, "# \n");
     return;
   }
 
@@ -138,9 +138,9 @@ async function build(params: {
   const pages = ["about"];
   for (const page of pages) {
     try {
-      const text = await Deno.readTextFile(`content/${page}.dj`);
-      const ast = await djot.parse(text);
-      const html = djot.render(ast, {});
+      const text = await Deno.readTextFile(`content/${page}.md`);
+      const tokens = md.parse(text);
+      const html = md.render(tokens, {});
       await update_file(
         `out/www/${page}.html`,
         html_ugly(Page(page, html)),
@@ -237,13 +237,13 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
   const start = performance.now();
   const posts = [];
   for await (const file_path of walk("./content/posts/")) {
-    if (!file_path.endsWith(".dj")) continue;
+    if (!file_path.endsWith(".md")) continue;
     if (filter !== "") {
       if (file_path.indexOf(filter) === -1) continue;
     }
-    const match = file_path.match(/^.*(\d\d\d\d)-(\d\d)-(\d\d)-(.*)\.dj$/);
+    const match = file_path.match(/^.*(\d\d\d\d)-(\d\d)-(\d\d)-(.*)\.md$/);
     if (!match) {
-      console.warn(`skipping ${file_path}: filename does not match YYYY-MM-DD-slug.dj`);
+      console.warn(`skipping ${file_path}: filename does not match YYYY-MM-DD-slug.md`);
       continue;
     }
     const [, y, m, d, slug] = match;
@@ -259,9 +259,9 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
     ctx.read_ms += performance.now() - t;
 
     t = performance.now();
-    let ast;
+    let tokens;
     try {
-      ast = djot.parse(text);
+      tokens = md.parse(text);
     } catch (err) {
       console.warn(`skipping ${file_path}: parse error: ${err}`);
       continue;
@@ -269,10 +269,10 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
     ctx.parse_ms += performance.now() - t;
 
     t = performance.now();
-    const render_ctx = { date, summary: undefined, title: undefined };
+    const render_ctx: md.RenderCtx = { date };
     let html;
     try {
-      html = djot.render(ast, render_ctx);
+      html = md.render(tokens, render_ctx);
     } catch (err) {
       console.warn(`skipping ${file_path}: render error: ${err}`);
       continue;
@@ -296,7 +296,7 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
       content: html,
       summary: render_ctx.summary ?? "",
       path: `/${y}/${m}/${d}/${slug}.html`,
-      src: `/content/posts/${y}-${m}-${d}-${slug}.dj`,
+      src: `/content/posts/${y}-${m}-${d}-${slug}.md`,
     });
   }
   posts.sort((l, r) => l.path < r.path ? 1 : -1);

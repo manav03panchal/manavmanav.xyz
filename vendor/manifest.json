@@ -1,5 +1,83 @@
 {
-  "folders": {
-    "https://raw.githubusercontent.com/jgm/djot.js/": "raw.githubusercontent.com/jgm/#djot.js_af886"
+  "modules": {
+    "https://esm.sh/@types/linkify-it@~5.0.0/index.d.ts": {
+      "headers": {
+        "location": "https://esm.sh/@types/linkify-it@5.0.0/index.d.ts"
+      }
+    },
+    "https://esm.sh/@types/markdown-it@~14.1.2/index.d.ts": {
+      "headers": {
+        "location": "https://esm.sh/@types/markdown-it@14.1.2/index.d.ts"
+      }
+    },
+    "https://esm.sh/@types/mdurl@~2.0.0/index.d.ts": {
+      "headers": {
+        "location": "https://esm.sh/@types/mdurl@2.0.0/index.d.ts"
+      }
+    },
+    "https://esm.sh/entities@4.5.0?target=denonext": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "x-typescript-types": "https://esm.sh/entities@4.5.0/lib/index.d.ts"
+      }
+    },
+    "https://esm.sh/entities@^4.4.0?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/entities@4.5.0?target=denonext"
+      }
+    },
+    "https://esm.sh/linkify-it@5.0.0?target=denonext": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "x-typescript-types": "https://esm.sh/@types/linkify-it@~5.0.0/index.d.ts"
+      }
+    },
+    "https://esm.sh/linkify-it@^5.0.0?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/linkify-it@5.0.0?target=denonext"
+      }
+    },
+    "https://esm.sh/markdown-it@14.1.0": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "x-typescript-types": "https://esm.sh/@types/markdown-it@~14.1.2/index.d.ts"
+      }
+    },
+    "https://esm.sh/mdurl@2.0.0?target=denonext": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "x-typescript-types": "https://esm.sh/@types/mdurl@~2.0.0/index.d.ts"
+      }
+    },
+    "https://esm.sh/mdurl@^2.0.0?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/mdurl@2.0.0?target=denonext"
+      }
+    },
+    "https://esm.sh/punycode.js@2.3.1?target=denonext": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8"
+      }
+    },
+    "https://esm.sh/punycode.js@^2.3.1?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/punycode.js@2.3.1?target=denonext"
+      }
+    },
+    "https://esm.sh/uc.micro@2.1.0?target=denonext": {
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8"
+      }
+    },
+    "https://esm.sh/uc.micro@^2.0.0?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/uc.micro@2.1.0?target=denonext"
+      }
+    },
+    "https://esm.sh/uc.micro@^2.1.0?target=denonext": {
+      "headers": {
+        "location": "https://esm.sh/uc.micro@2.1.0?target=denonext"
+      }
+    }
   }
 }
