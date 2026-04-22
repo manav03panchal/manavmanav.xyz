@@ -1,4 +1,5 @@
 import { html, HtmlString } from "./templates.tsx";
+import { escapeHtml } from "./tsx.ts";
 
 import hljs_ from "@highlightjs/highlight.min.js";
 const hljs: any = hljs_;
@@ -69,9 +70,7 @@ export function highlight(
 
 function add_spans(source: string, language?: string): HtmlString {
   if (!language || language === "adoc") {
-    return html`
-      ${source}
-    `;
+    return new HtmlString(escapeHtml(source));
   }
   if (language == "console") return add_spans_console(source);
   try {
@@ -80,39 +79,21 @@ function add_spans(source: string, language?: string): HtmlString {
   } catch (e) {
     console.error(e);
     console.error(`\n    hljs failed for language=${language}\n`);
-    return html`
-      ${source}
-    `;
+    return new HtmlString(escapeHtml(source));
   }
 }
 
 function add_spans_console(source: string): HtmlString {
-  let cont = false;
   const lines = source.trimEnd().split("\n").map((line) => {
-    if (cont) {
-      cont = line.endsWith("\\");
-      return html`
-        ${line}\\n
-      `;
-    }
     if (line.startsWith("$ ")) {
-      cont = line.endsWith("\\");
-      return html`
-        <span class="hl-title function_">$</span> ${line.substring(2)}\\n
-      `;
+      return `<span class="hl-title function_">$</span> ${escapeHtml(line.slice(2))}`;
     }
     if (line.startsWith("#")) {
-      return html`
-        <span class="hl-comment">${line}</span>\\n
-      `;
+      return `<span class="hl-comment">${escapeHtml(line)}</span>`;
     }
-    return html`
-      <span class="hl-output">${line}</span>\\n
-    `;
+    return `<span class="hl-output">${escapeHtml(line)}</span>`;
   });
-  return html`
-    ${lines}
-  `;
+  return new HtmlString(lines.join("\n"));
 }
 
 function parse_highlight_spec(spec?: string): number[] {
