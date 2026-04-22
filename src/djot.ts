@@ -1,6 +1,5 @@
 import { highlight } from "./highlight.ts";
 import { HtmlString, time_html } from "./templates.tsx";
-
 import { parse as djot_parse } from "@djot/parse.ts";
 import { HTMLRenderer, renderHTML } from "@djot/html.ts";
 import {
@@ -188,7 +187,7 @@ ${pre}
     },
     image: (node: Image, r: HTMLRenderer): string => {
       if (has_class(node, "video")) {
-        if (!node.destination) throw "missing destination";
+        if (!node.destination) throw new Error("missing destination");
         if (has_class(node, "loop")) {
           return `<video src="${node.destination}" autoplay muted=true loop=true></video>`;
         } else {

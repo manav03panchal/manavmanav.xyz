@@ -137,13 +137,17 @@ async function build(params: {
 
   const pages = ["about"];
   for (const page of pages) {
-    const text = await Deno.readTextFile(`content/${page}.dj`);
-    const ast = await djot.parse(text);
-    const html = djot.render(ast, {});
-    await update_file(
-      `out/www/${page}.html`,
-      html_ugly(Page(page, html)),
-    );
+    try {
+      const text = await Deno.readTextFile(`content/${page}.dj`);
+      const ast = await djot.parse(text);
+      const html = djot.render(ast, {});
+      await update_file(
+        `out/www/${page}.html`,
+        html_ugly(Page(page, html)),
+      );
+    } catch (e) {
+      console.warn(`skipping ${page}: ${e}`);
+    }
   }
 
   const paths = [
@@ -237,10 +241,17 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
     if (filter !== "") {
       if (file_path.indexOf(filter) === -1) continue;
     }
-    const [, y, m, d, slug] = file_path.match(
-      /^.*(\d\d\d\d)-(\d\d)-(\d\d)-(.*)\.dj$/,
-    )!;
+    const match = file_path.match(/^.*(\d\d\d\d)-(\d\d)-(\d\d)-(.*)\.dj$/);
+    if (!match) {
+      console.warn(`skipping ${file_path}: filename does not match YYYY-MM-DD-slug.dj`);
+      continue;
+    }
+    const [, y, m, d, slug] = match;
     const [year, month, day] = [y, m, d].map((it) => parseInt(it, 10));
+    if (month < 1 || month > 12 || day < 1 || day > 31) {
+      console.warn(`skipping ${file_path}: invalid date ${y}-${m}-${d}`);
+      continue;
+    }
     const date = new Date(Date.UTC(year, month - 1, day));
 
     let t = performance.now();
@@ -248,23 +259,42 @@ async function collect_posts(ctx: Ctx, filter: string): Promise<Post[]> {
     ctx.read_ms += performance.now() - t;
 
     t = performance.now();
-    const ast = djot.parse(text);
+    let ast;
+    try {
+      ast = djot.parse(text);
+    } catch (err) {
+      console.warn(`skipping ${file_path}: parse error: ${err}`);
+      continue;
+    }
     ctx.parse_ms += performance.now() - t;
 
     t = performance.now();
     const render_ctx = { date, summary: undefined, title: undefined };
-    const html = djot.render(ast, render_ctx);
+    let html;
+    try {
+      html = djot.render(ast, render_ctx);
+    } catch (err) {
+      console.warn(`skipping ${file_path}: render error: ${err}`);
+      continue;
+    }
     ctx.render_ms += performance.now() - t;
 
+    if (!render_ctx.title) {
+      console.warn(`skipping ${file_path}: no h1 heading found`);
+      continue;
+    }
+    if (!render_ctx.summary) {
+      console.warn(`${file_path}: no summary paragraph found`);
+    }
     posts.push({
       year,
       month,
       day,
       slug,
       date,
-      title: render_ctx.title!,
+      title: render_ctx.title,
       content: html,
-      summary: render_ctx.summary!,
+      summary: render_ctx.summary ?? "",
       path: `/${y}/${m}/${d}/${slug}.html`,
       src: `/content/posts/${y}-${m}-${d}-${slug}.dj`,
     });

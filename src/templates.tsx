@@ -144,7 +144,6 @@ export function Page(name: string, content: HtmlString) {
       path={`/${name}`}
       title="manav"
       description={blurb}
-      src={`/content/${name}.dj`}
     >
       <Raw unsafe={content.value} />
     </Base>
@@ -162,7 +161,7 @@ export function PostList({ posts }: { posts: PostData[] }) {
   ));
 
   return (
-    <Base path="" title="manav" description={blurb} src="/src/templates.tsx">
+    <Base path="" title="manav" description={blurb}>
       <ul class="post-list">
         {list_items}
       </ul>
@@ -173,7 +172,6 @@ export function PostList({ posts }: { posts: PostData[] }) {
 export function Post({ post }: { post: PostData }) {
   return (
     <Base
-      src={post.src}
       title={post.title}
       description={post.summary}
       path={post.path}
