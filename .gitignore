@@ -2,3 +2,4 @@
 .DS_Store
 content/posts/*stress-test*
 .humanboard/
+.claude/
